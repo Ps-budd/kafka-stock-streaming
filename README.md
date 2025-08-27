@@ -52,63 +52,6 @@ python consumer_db.py   # writes to Postgres
 python consumer_alerts.py
 ```
 
-## Setup and running
-
-1) Clone and enter the project
-```bash
-git clone git@github.com:Ps-budd/kafka-stock-streaming.git
-cd kafka-stock-streaming
-```
-
-2) Start infra (Kafka, Zookeeper, Postgres)
-```bash
-docker compose up -d
-```
-
-3) Python env and dependencies
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-4) Configure environment
-- Option A: export in shell (temporary)
-```bash
-export POLYGON_API_KEY=YOUR_POLYGON_KEY
-export SYMBOLS=TSLA,AAPL,MSFT,AMZN,GOOGL
-export INTERVAL_SECONDS=5
-export POSTGRES_DSN=postgresql://postgres:postgres@localhost:5432/stocks
-```
-- Option B: create `.env` in the repo (loaded automatically by the producer)
-```bash
-POLYGON_API_KEY=YOUR_POLYGON_KEY
-SYMBOLS=TSLA,AAPL,MSFT,AMZN,GOOGL
-INTERVAL_SECONDS=5
-POSTGRES_DSN=postgresql://postgres:postgres@localhost:5432/stocks
-```
-
-5) Run the services (each in its own terminal)
-```bash
-source .venv/bin/activate
-python consumer_db.py
-python consumer_alerts.py
-python producer.py
-```
-
-6) Start the frontend dashboard
-```bash
-cd frontend
-npm install
-npm run dev
-# open http://localhost:3000
-```
-
-Troubleshooting
-- If Polygon last-trade API returns 403, the producer falls back to 1-min aggregates automatically.
-- If DB tables don’t exist, ensure `consumer_db.py` and `consumer_alerts.py` are running; they create schemas.
-- For Git pushes, prefer SSH (`git@github.com:Ps-budd/kafka-stock-streaming.git`).
-
 ## Test Alpha Vantage
 ```bash
 curl -s 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=TSLA&apikey=YOUR_KEY' | jq '.'
