@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Node/Next
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+frontend/.env.local
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
