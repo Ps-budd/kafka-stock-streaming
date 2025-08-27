@@ -2,6 +2,12 @@
 
 Stream stock price ticks from Polygon.io into Kafka, persist to Postgres, and compute SMA-based alerts.
 
+## Screenshots
+
+![Streaming Flow](assets/flow.png)
+
+![Dashboard](assets/dashboard.png)
+
 ## Architecture
 ```
 Producer (Polygon.io) --> Kafka topic: stock_prices --> [DB Consumer] --> Postgres
@@ -109,17 +115,7 @@ Troubleshooting
 - If DB tables don’t exist, ensure `consumer_db.py` and `consumer_alerts.py` are running; they create schemas.
 - For Git pushes, prefer SSH (`git@github.com:Ps-budd/kafka-stock-streaming.git`).
 
-## Screenshots
-
-Streaming flow (interactive):
-
-![Streaming Flow](assets/flow.png)
-
-Dashboard (chart + alerts):
-
-![Dashboard](assets/dashboard.png)
-
-Place your screenshots at `assets/flow.png` and `assets/dashboard.png` (PNG/JPG work). They’ll be displayed above.
+Place your screenshots at `assets/flow.png` and `assets/dashboard.png` (PNG/JPG work).
 
 ## Test Alpha Vantage
 ```bash
